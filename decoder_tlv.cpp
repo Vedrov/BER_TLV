@@ -1,4 +1,4 @@
-#include "decoder_tlv.h"
+ï»¿#include "decoder_tlv.h"
 
 decoder_TLV::decoder_TLV(QObject *parent) :
     QObject(parent)
@@ -6,7 +6,7 @@ decoder_TLV::decoder_TLV(QObject *parent) :
     initMap();
 }
 /*
- * Çàïîëíåíèå êàðòû òåãîâ
+ * Ð—Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ ÐºÐ°Ñ€Ñ‚Ñ‹ Ñ‚ÐµÐ³Ð¾Ð²
  */
 void decoder_TLV::initMap()
 {
@@ -25,7 +25,7 @@ void decoder_TLV::initMap()
   TagsEMV.insert(0x5F24,"Application Expiration Date");
   TagsEMV.insert(0x94,"Application File Locator (AFL)");
   TagsEMV.insert(0x4F,"Application Identifier(AID) - card");
-  TagsEMV.insert(0x9F06,"Application Identifier (AID) – terminal");
+  TagsEMV.insert(0x9F06,"Application Identifier (AID) Ð¦ terminal");
   TagsEMV.insert(0x82,"Application Interchange Profile");
   TagsEMV.insert(0x50,"Application Label");
   TagsEMV.insert(0x9F12,"Application Preferred Name");
@@ -77,9 +77,9 @@ void decoder_TLV::initMap()
   TagsEMV.insert(0x9F48,"Integrated Circuit Card (ICC) Public Key Remainder");
   TagsEMV.insert(0x9F1E,"Interface Device (IFD) Serial Number");
   TagsEMV.insert(0x5F53,"International Bank Account Number (IBAN)");
-  TagsEMV.insert(0x9F0D,"Issuer Action Code – Default");
-  TagsEMV.insert(0x9F0E,"Issuer Action Code – Denial");
-  TagsEMV.insert(0x9F0F,"Issuer Action Code – Online");
+  TagsEMV.insert(0x9F0D,"Issuer Action Code Ð¦ Default");
+  TagsEMV.insert(0x9F0E,"Issuer Action Code Ð¦ Denial");
+  TagsEMV.insert(0x9F0F,"Issuer Action Code Ð¦ Online");
   TagsEMV.insert(0x9F10,"Issuer Application Data");
   TagsEMV.insert(0x91,"Issuer Authentication Data");
   TagsEMV.insert(0x9F11,"Issuer Code Table Index");
@@ -149,10 +149,10 @@ void decoder_TLV::initMap()
 
 
 /*
- * Îïðåäåëåíèå äëèíû äàííûõ
- * Âîçâðàùàåìîå çíà÷åíèå - äëèíà äàííûõ
- * Áàéò(-û) äëèíû äàííûõ ïîñëå îïðåäåëåíèÿ, óäàëÿþòñÿ èç ìàññèâà TLV
- * (íå ðåàëèçîâàíà íåîïðåäåëåííàÿ äëèíà)
+ * ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð´Ð»Ð¸Ð½Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ…
+ * Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÐµÐ¼Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ - Ð´Ð»Ð¸Ð½Ð° Ð´Ð°Ð½Ð½Ñ‹Ñ…
+ * Ð±Ð°Ð¹Ñ‚(-Ñ‹) Ð´Ð»Ð¸Ð½Ñ‹ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¿Ð¾ÑÐ»Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ñ, ÑƒÐ´Ð°Ð»ÑÑŽÑ‚ÑÑ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° TLV
+ * (Ð½Ðµ Ñ€ÐµÐ°Ð»Ð¸Ð·Ð¾Ð²Ð°Ð½Ð° Ð½ÐµÐ¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð½Ð°Ñ Ð´Ð»Ð¸Ð½Ð°)
 */
 int decoder_TLV::processingLength(QByteArray *data)
 {
@@ -165,7 +165,7 @@ int decoder_TLV::processingLength(QByteArray *data)
      data->remove(0,1);
      return length.toHex().toInt(0,16);
     }
-  else if(byteLength > 0x80)            //îïðåäåëåíèå äëèíû, ðàçìåðîì - áîëåå îäíîãî áàéòà
+  else if(byteLength > 0x80)            //Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð´Ð»Ð¸Ð½Ñ‹, Ñ€Ð°Ð·Ð¼ÐµÑ€Ð¾Ð¼ - Ð±Ð¾Ð»ÐµÐµ Ð¾Ð´Ð½Ð¾Ð³Ð¾ Ð±Ð°Ð¹Ñ‚Ð°
          {
           unsigned int i;
           for (i = 0; i <= byteLength - 0x80; i++)
@@ -180,12 +180,12 @@ int decoder_TLV::processingLength(QByteArray *data)
 
 
 /*
- *Îïðåäåëåíèå ôîðìàòà äàíûõ, âûâîä äàííûõ.
- *Áàéò(-û) äàííûõ ïîñëå îïðåäåëåíèÿ, óäàëÿþòñÿ èç ìàññèâà TLV
+ *ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ñ„Ð¾Ñ€Ð¼Ð°Ñ‚Ð° Ð´Ð°Ð½Ñ‹Ñ…, Ð²Ñ‹Ð²Ð¾Ð´ Ð´Ð°Ð½Ð½Ñ‹Ñ….
+ *Ð‘Ð°Ð¹Ñ‚(-Ñ‹) Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¿Ð¾ÑÐ»Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ñ, ÑƒÐ´Ð°Ð»Ñ‡ÑŽÑ‚ÑÑ‡ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° TLV
 */
 void decoder_TLV::processingData(QByteArray *data, unsigned int amountByteTag)
 {
- if (!(data->operator [](0) & 0x20))                //TLV ñîäåðæèò ïðîñòûå äàííûå
+ if (!(data->operator [](0) & 0x20))                //TLV ÑÐ¾Ð´ÐµÑ€Ð¶Ð¸Ñ‚ Ð¿Ñ€Ð¾ÑÑ‚Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ
     {
      data->remove(0,amountByteTag);
      int length = processingLength(data);
@@ -200,16 +200,16 @@ void decoder_TLV::processingData(QByteArray *data, unsigned int amountByteTag)
 }
 
 /*
- *Îïðåäåëåíèå òåãà, ïîèñê â êàðòå òåãîâ.
- *Ïðè îòñóòâèè â êàðòå òåãîâ - îòáðàæàåòñÿ êàê "Unknown tag"
- *Áàéò(-û) òåãà ïîñëå îïðåäåëåíèÿ, óäàëÿþòñÿ èç ìàññèâà TLV
+ *ÐžÐ¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ñ‚ÐµÐ³Ð°, Ð¿Ð¾Ð¸ÑÐº Ð² ÐºÐ°Ñ€Ñ‚Ðµ Ñ‚ÐµÐ³Ð¾Ð².
+ *Ð¿Ñ€Ð¸ Ð¾Ñ‚ÑÑƒÑ‚Ð²Ð¸Ð¸ Ð² ÐºÐ°Ñ€Ñ‚Ðµ Ñ‚ÐµÐ³Ð¾Ð² - Ð¾Ñ‚Ð±Ñ€Ð°Ð¶Ð°ÐµÑ‚ÑÑ ÐºÐ°Ðº "Unknown tag"
+ *Ð±Ð°Ð¹Ñ‚(-Ñ‹) Ñ‚ÐµÐ³Ð° Ð¿Ð¾ÑÐ»Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ñ, ÑƒÐ´Ð°Ð»ÑÑŽÑ‚ÑÑ Ð¸Ð· Ð¼Ð°ÑÑÐ¸Ð²Ð° TLV
 */
 void decoder_TLV::processingTag(QByteArray *data)
 {
  while(!(data->isEmpty()))
       {
        QByteArray tags;
-       if ((data->operator [](0) & 0x1F) == 0x1F)          //äâóõáàéòíûé òåã
+       if ((data->operator [](0) & 0x1F) == 0x1F)          //Ð´Ð²ÑƒÑ…Ð±Ð°Ð¹Ñ‚Ð½Ñ‹Ð¹ Ñ‚ÐµÐ³
           {
            tags.append(data->operator [](0));
            tags.append(data->operator [](1));
@@ -224,7 +224,7 @@ void decoder_TLV::processingTag(QByteArray *data)
                 processingData(data,2);
                }
           }
-         else                                 //îäíîáàéòíûé òåã
+         else                                 //Ð¾Ð´Ð½Ð¾Ð±Ð°Ð¹Ñ‚Ð½Ñ‹Ð¹ Ñ‚ÐµÐ³
             {
              tags.append(data->operator [](0));
              if(TagsEMV.contains(tags.toHex().toInt(0,16)))
